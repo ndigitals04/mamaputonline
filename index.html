@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MamaPutOnline – Authentic Nigerian Cooked Meals</title>
+  <!-- Font Awesome CDN -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Playfair Display for headings, Lato for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Monoton&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <!-- Tailwind custom config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              blue:   '#2C3947',   /* primary dark blue brand color */
+              gold:   '#C2A56D',   /* light gold */
+              gray:  '#E8EDF2',   /* soft gray background */
+              lightBlue: '#547A95',   /* Lighter blue version of navy blue */
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{
+      --section-height: calc(100vh - 72px)
+    }
+    /* ── Global resets ─────────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFF8EE;
+      /* leave top + bottom space for sticky header & footer */
+      padding-top: 72px;
+      padding-bottom: 64px;
+      position: relative;
+    }
+
+    /* ── Smooth scroll on anchor links ─────────────────────── */
+    html { scroll-behavior: smooth; }
+
+    /* ── Sticky header at top of viewport ──────────────────── */
+    #site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: 72px;
+    }
+
+    /* ── Sticky footer at bottom of viewport ───────────────── */
+    #site-footer {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 1000;
+    }
+
+    /* ── Product card hover lift ────────────────────────────── */
+    .product-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+
+    /* ── Mobile nav toggle ──────────────────────────────────── */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
+
+    /* ── Hero CTA pulse animation ──────────────────────────── */
+    @keyframes pulse-border {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212,160,23,0.5); }
+      50%       { box-shadow: 0 0 0 10px rgba(212,160,23,0); }
+    }
+    .cta-btn { animation: pulse-border 2.4s infinite; }
+
+    /* ── Active sidebar link highlight ─────────────────────── */
+    .sidebar-link:hover { color: #D4A017; font-weight: 700; }
+  </style>
+</head>
+
+<body class="text-gray-800">
+
+<!-- ══════════════════════════════════════════════════════════
+     STICKY HEADER
+     Contains: Logo (left) | Nav links (center) | Search (right)
+     ══════════════════════════════════════════════════════════ -->
+<header id="site-header" class="bg-brand-blue shadow-lg">
+  <div class="max-w-screen-xl mx-auto px-4 h-full flex items-center justify-between gap-4">
+
+    <!-- ── Logo: MPO initials mark + wordmark ─────────────── -->
+    <a href="#" class="flex items-center gap-2 flex-shrink-0">
+      <!-- SVG logo badge with the initials MPO -->
+      <!-- <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-label="MamaPutOnline logo"> -->
+        <!-- Outer circle in gold -->
+        <!-- <circle cx="22" cy="22" r="21" fill="#D4A017"/> -->
+        <!-- Inner circle in brand blue -->
+        <!-- <circle cx="22" cy="22" r="17" fill="#1A3E6F"/> -->
+        <!-- Steam dots above bowl (decorative) -->
+        <!-- <circle cx="15" cy="10" r="2" fill="#D4A017" opacity="0.7"/>
+        <circle cx="22" cy="8"  r="2" fill="#D4A017" opacity="0.7"/>
+        <circle cx="29" cy="10" r="2" fill="#D4A017" opacity="0.7"/> -->
+        <!-- Bowl shape -->
+        <!-- <ellipse cx="22" cy="27" rx="10" ry="5" fill="#D4A017"/>
+        <rect x="12" y="22" width="20" height="5" rx="2" fill="#D4A017"/> -->
+        <!-- MPO initials -->
+        <!-- <text x="22" y="26" text-anchor="middle" font-family="Playfair Display, serif"
+              font-size="9" font-weight="700" fill="#1A3E6F" letter-spacing="1">MPO</text>
+      </svg> -->
+      <div class="w-20 h-full flex items-end overflow-hidden"><img src="./images/MPO_logo_cropped.png" alt="MamaPutOnline Logo" class="w-full  h-full"></div>
+      <!-- Wordmark – hidden on very small screens -->
+      <span class="hidden sm:block font-display text-white text-lg leading-tight">
+        Mama<span class="text-brand-gold">Put</span>Online
+      </span>
+    </a>
+
+    <!-- ── Desktop navigation links (center) ───────────────── -->
+    <nav class="hidden md:flex items-center gap-6 font-body font-bold text-sm text-white uppercase tracking-wide">
+      <a href="#products"  class="hover:text-brand-gold transition-colors">Products</a>
+      <a href="#services"  class="hover:text-brand-gold transition-colors">Services</a>
+      <a href="#customer"  class="hover:text-brand-gold transition-colors">Customer Service</a>
+      <a href="#contact"   class="hover:text-brand-gold transition-colors">Contact Us</a>
+    </nav>
+
+    <!-- ── Search input (right) ─────────────────────────────── -->
+    <div class="hidden sm:flex items-center bg-white/10 border border-white/30 rounded-full px-3 py-1.5 gap-2 flex-shrink-0">
+      <!-- Search icon -->
+      <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" stroke-width="2"
+           viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input
+        type="search"
+        placeholder="Search delicacies…"
+        class="bg-transparent text-white placeholder-white/60 text-sm outline-none w-32 md:w-48"
+        aria-label="Search meals"
+      />
+    </div>
+
+    <!-- ── Hamburger button (mobile only) ───────────────────── -->
+    <button
+      id="hamburger"
+      class="md:hidden text-white focus:outline-none"
+      aria-label="Toggle mobile menu"
+      onclick="document.getElementById('mobile-menu').classList.toggle('open')"
+    >
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ── Mobile dropdown menu ──────────────────────────────── -->
+  <div
+    id="mobile-menu"
+    class="flex-col bg-brand-blue border-t border-white/20 px-6 py-4 gap-4
+           font-bold text-white text-sm uppercase tracking-wide md:hidden"
+  >
+    <a href="#products" onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-brand-gold">Products</a>
+    <a href="#services" onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-brand-gold">Services</a>
+    <a href="#customer" onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-brand-gold">Customer Service</a>
+    <a href="#contact"  onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-brand-gold">Contact Us</a>
+    <!-- Mobile search -->
+    <div class="flex items-center bg-white/10 border border-white/30 rounded-full px-3 py-1.5 gap-2 mt-2">
+      <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="search" placeholder="Search meals…" class="bg-transparent text-white placeholder-white/60 text-sm outline-none w-full" aria-label="Search meals" />
+    </div>
+  </div>
+</header>
+<!-- END HEADER -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO SECTION
+     Min height 30vh, full width, split into two equal halves:
+       Left  → food image + CTA button overlay
+       Right → bold invite text
+     ══════════════════════════════════════════════════════════ -->
+<section class="flex flex-col md:flex-row min-h-[50vh] bg-brand-gold max-h-(--section-height) w-full overflow-hidden">
+
+  <!-- ── Left half: hero food image with CTA overlay ────────── -->
+  <div class="relative flex-1 min-h-(--section-height) md:min-h-[10vh] h-(--section-height) overflow-hidden bg-black">
+    <!-- Real photo from Unsplash (Nigerian-style soup/stew) -->
+     <!--  old picture src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=900&q=80" -->
+    <img
+      src="./images/nigerian_dishes.jpg"
+      alt="Steaming Nigerian dishes"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+      loading="eager"
+    />
+    <!-- Dark overlay for readability -->
+    <div class="absolute inset-0 bg-black/45"></div>
+
+    <!-- CTA block centered over the image -->
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 py-12">
+      <span class="text-brand-gold font-display text-sm uppercase tracking-widest mb-2">Fresh Daily · Home-Cooked</span>
+      <h2 class="font-[Poppins] text-white text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-6 drop-shadow-lg">
+        Mama's Delicacy,<br/>On The<br/>Go
+      </h2>
+      <!-- Pulsing CTA button -->
+      <a
+        href="#products"
+        class="cta-btn bg-brand-gold hover:bg-yellow-500 text-brand-blue font-bold
+               uppercase tracking-wider px-8 py-3 rounded-full text-sm transition-colors"
+      >
+        Order Now 🍲
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Right half: bold invite copy ─────────────────────────── -->
+  <div class="flex-1 bg-brand-blue flex flex-col items-center justify-center
+              text-center px-8 py-14 gap-6 min-h-[40vh]">
+
+    <!-- Large decorative quote mark -->
+    <span class="text-brand-gold font-display text-8xl leading-none opacity-30 select-none">"</span>
+
+    <h1 class="font-display text-white text-3xl md:text-4xl lg:text-5xl font-black leading-tight -mt-10">
+      <span class="text-brand-gold">Treat yourself</span><br/>to the  most sumptuous dishes
+      <span class="text-brand-gold">Just like Mama's</span><br/>
+      Cooking!
+    </h1>
+
+    <p class="text-white/80 text-base md:text-md max-w-xs leading-relaxed">
+      Authentic and Sumptuous Nigerian meals including soups, stews, Rice &amp; swallows — cooked fresh every day
+      and delivered hot to your doorstep. <strong class="text-brand-gold">Order before 1 PM</strong>
+      for same-day delivery!
+    </p>
+
+    <!-- Trust badges -->
+    <div class="flex flex-wrap justify-center gap-4 mt-2">
+      <div class="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 text-white text-xs font-bold">
+        ⚡ Fast Delivery
+      </div>
+      <div class="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 text-white text-xs font-bold">
+        🌿 100% Fresh
+      </div>
+      <div class="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 text-white text-xs font-bold">
+        ❤️ Home-Cooked
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END HERO -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SERVICES SECTION (anchor target for nav)
+     ══════════════════════════════════════════════════════════ -->
+<section id="services" class="bg-white py-12 px-4">
+  <div class="max-w-screen-xl mx-auto text-center">
+    <h2 class="font-display text-brand-blue text-3xl font-bold mb-2">Our Services</h2>
+    <p class="text-gray-500 mb-8 max-w-xl mx-auto">We bring the warmth of Mum's cooking right to your doorstep.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <!-- Service card: Delivery -->
+      <div class="bg-brand-gray rounded-2xl p-6 border border-brand-gold/20 hover:shadow-md transition">
+        <div class="text-4xl mb-3">🏘️🚚</div>
+        <h3 class="font-bold text-brand-blue text-lg mb-1">Fast Home Delivery</h3>
+        <p class="text-gray-500 text-sm">Your Hot meals at your door within 45 minutes of ordering.</p>
+      </div>
+      <!-- Service card: Catering -->
+      <div class="bg-brand-gray rounded-2xl p-6 border border-brand-gold/20 hover:shadow-md transition">
+        <div class="text-4xl mb-3">🍛</div>
+        <h3 class="font-bold text-brand-blue text-lg mb-1">Event Catering</h3>
+        <p class="text-gray-500 text-sm">We organize and cater for weddings, corporate events, &amp; parties with authentic Nigerian cuisine.</p>
+      </div>
+      <!-- Service card: Subscription -->
+      <div class="bg-brand-gray rounded-2xl p-6 border border-brand-gold/20 hover:shadow-md transition">
+        <div class="text-4xl mb-3">📦</div>
+        <h3 class="font-bold text-brand-blue text-lg mb-1">Subscription</h3>
+        <p class="text-gray-500 text-sm">Subscribe on our weekly or monthly plan to always get fresh meals every priority delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MAIN SECTION: Sidebar (left) + Product Grid (right)
+     ══════════════════════════════════════════════════════════ -->
+<main id="products" class="max-w-screen-xl mx-auto px-4 py-12 flex flex-col md:flex-row gap-8">
+
+  <!-- ── Left Sidebar: links to each product card ─────────── -->
+  <aside class="w-full md:w-56 flex-shrink-0">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sticky top-20">
+      <h3 class="font-display text-brand-blue text-lg font-bold mb-4 border-b border-brand-gold/30 pb-2">
+        🍽 Our Menu
+      </h3>
+      <ul class="space-y-2 text-sm font-body text-gray-600">
+        <!-- Each sidebar item links to the matching product card via its id -->
+        <li><a href="#egusi-soup"       class="sidebar-link hover:text-brand-gold transition-colors block py-1">Egusi Soup</a></li>
+        <li><a href="#jollof-rice"      class="sidebar-link hover:text-brand-gold transition-colors block py-1">Jollof Rice</a></li>
+        <li><a href="#oha-soup"         class="sidebar-link hover:text-brand-gold transition-colors block py-1">Oha Soup</a></li>
+        <li><a href="#banga-soup"       class="sidebar-link hover:text-brand-gold transition-colors block py-1">Banga Soup</a></li>
+        <li><a href="#pap-akara"      class="sidebar-link hover:text-brand-gold transition-colors block py-1">Pap and Akara </a></li>
+        <li><a href="#afang-soup"       class="sidebar-link hover:text-brand-gold transition-colors block py-1">Afang Soup</a></li>
+        <li><a href="#fried-rice"       class="sidebar-link hover:text-brand-gold transition-colors block py-1">Fried Rice</a></li>
+        <li><a href="#edikaikong"       class="sidebar-link hover:text-brand-gold transition-colors block py-1">Edikaikong</a></li>
+        <li><a href="#moimoi"           class="sidebar-link hover:text-brand-gold transition-colors block py-1">Moi Moi</a></li>
+        <li><a href="#pepper-soup"      class="sidebar-link hover:text-brand-gold transition-colors block py-1">Pepper Soup</a></li>
+        <li><a href="#okra-soup"        class="sidebar-link hover:text-brand-gold transition-colors block py-1">Okra Soup</a></li>
+        <li><a href="#suya"             class="sidebar-link hover:text-brand-gold transition-colors block py-1">Suya</a></li>
+      </ul>
+
+      <!-- Promo block inside sidebar -->
+      <div class="mt-6 bg-brand-blue rounded-xl p-4 text-center">
+        <p class="text-white text-xs font-bold uppercase tracking-wide mb-1">Today's Deal</p>
+        <p class="text-brand-gold font-display text-lg font-black">5% OFF</p>
+        <p class="text-white/70 text-xs">on orders above ₦5,000</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Right: Product Grid (4 cols × 3 rows = 12 cards) ──── -->
+  <section class="flex-1">
+    <h2 class="font-display text-brand-blue text-2xl font-bold mb-6">
+      Today's Fresh Delicacies
+    </h2>
+
+    <!-- Product grid: 2 cols on mobile, 3 on tablet, 4 on desktop -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+
+      <!-- ── PRODUCT CARD 1 ── -->
+      <article id="egusi-soup" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <!--former egusi- https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&q=75 -->
+          <img
+            src="./images/Egusi_Soup_&_Fufu.jpg"
+            alt="Egusi Soup"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+          <!-- Badge -->
+          <span class="absolute top-2 left-2 bg-brand-lightBlue text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">Best Seller</span>
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Egusi Soup</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 portion (400ml)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦3,500</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 2 ── -->
+      <article id="jollof-rice" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/jollof_rice.jpg"
+            alt="Jollof Rice"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Jollof Rice</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 portion with chicken (400g)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦2,800</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 3 ── -->
+      <article id="oha-soup" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/Oha_soup.jpg"
+            alt="Oha Soup"
+            class="w-full h-36 object-cover object-center"
+            loading="lazy"
+          />
+          <span class="absolute top-2 left-2 bg-green-600 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">New</span>
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Oha Soup</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 portion (500ml)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦3,800</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 4 ── -->
+      <article id="banga-soup" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/banga_soup.jpg"
+            alt="Banga Soup"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Banga Soup</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 portion (500ml)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦3,200</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── ROW 2 ── -->
+
+      <!-- ── PRODUCT CARD 5 ── -->
+      <article id="pap-akara" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/pap_and_akara.jpg"
+            alt="Pap and Akara"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+          <span class="absolute top-2 left-2 bg-brand-lightBlue text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">Popular</span>
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Pap and Akara</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 5 Akara and 50cl of Pap</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦2,000</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 6 ── -->
+      <article id="afang-soup" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/Afang_soup.jpg"
+            alt="Afang Soup"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Afang Soup</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 portion (600ml)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦3,500</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 7 ── -->
+      <article id="fried-rice" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/Fried_rice.jpg"
+            alt="Fried Rice"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Fried Rice</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 portion  with Chicken and Salad</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦3,500</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 8 ── -->
+      <article id="edikaikong" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/EdikangIkong_Soup.jpg"
+            alt="Edikaikong Soup"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+          <span class="absolute top-2 left-2 bg-green-600 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">Fresh</span>
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Edikaikong</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 portion (500ml)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦3,000</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── ROW 3 ── -->
+
+      <!-- ── PRODUCT CARD 9 ── -->
+      <article id="moimoi" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/Moimoi.jpg"
+            alt="Moi Moi"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Moi Moi</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 2 wraps (250g)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦1000</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 10 ── -->
+      <article id="pepper-soup" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/Pepper_Soup.jpg"
+            alt="Pepper Soup"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+          <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">Spicy 🔥</span>
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Goat meat Pepper Soup</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 bowl (400ml)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦4,500</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 11 ── -->
+      <article id="okra-soup" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/Okra_Soup.jpg"
+            alt="Okra Soup"
+            class="w-full h-36 object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Okra Soup</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Qty: 1 portion (500ml)</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦2,800</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT CARD 12 ── -->
+      <article id="suya" class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div class="relative">
+          <img
+            src="./images/suya.jpg"
+            alt="Suya"
+            class="w-full h-36 object-cover object-center"
+            loading="lazy"
+          />
+          <span class="absolute top-2 left-2 bg-brand-lightBlue text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">Trending</span>
+        </div>
+        <div class="p-3">
+          <h4 class="font-display font-bold text-brand-blue text-sm leading-tight">Suya</h4>
+          <p class="text-gray-400 text-xs mt-0.5">Type: Beef Qty: 200g</p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-brand-lightBlue font-black text-base">₦2,000</span>
+            <button class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-blue-900 transition">Add</button>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- END product grid -->
+  </section><!-- END right content -->
+</main>
+<!-- END MAIN SECTION -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CUSTOMER SERVICE SECTION (anchor target)
+     ══════════════════════════════════════════════════════════ -->
+<section id="customer" class="bg-brand-blue py-12 px-4">
+  <div class="max-w-screen-xl mx-auto text-center">
+    <h2 class="font-display text-white text-3xl font-bold mb-2">Customer Service</h2>
+    <p class="text-white/70 max-w-lg mx-auto mb-8">We're here to help. Reach us any time.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-white">
+      <div class="bg-white/10 rounded-2xl p-6">
+        <div class="text-3xl mb-2">📞</div>
+        <h3 class="font-bold text-brand-gold mb-1">Call Us</h3>
+        <p class="text-sm text-white/80">+234 803 325 6678 MAMAPUTONLINE <br/>Mon–Sat, 8am–8pm</p>
+      </div>
+      <div class="bg-white/10 rounded-2xl p-6">
+        <div class="text-3xl mb-2">📧</div>
+        <h3 class="font-bold text-brand-gold mb-1">Email Us</h3>
+        <p class="text-sm text-white/80">order@mamaputonline.ng<br/>Response within 1 hour</p>
+      </div>
+      <div class="bg-white/10 rounded-2xl p-6">
+        <div class="text-3xl mb-2"><i class="fa-brands fa-whatsapp"></i></div>
+        <h3 class="font-bold text-brand-gold mb-1">Live Chat</h3>
+        <p class="text-sm text-white/80">Chat with us on WhatsApp<br/>for instant support</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTACT SECTION (anchor target)
+     ══════════════════════════════════════════════════════════ -->
+<section id="contact" class="bg-brand-gray py-12 px-4">
+  <div class="max-w-screen-xl mx-auto">
+    <h2 class="font-display text-brand-blue text-3xl font-bold mb-2 text-center">Contact Us</h2>
+    <p class="text-gray-500 text-center mb-8 max-w-lg mx-auto">Have a special order or request? Send us a message.</p>
+    <div class="max-w-lg mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+      <!-- Simple contact form layout -->
+      <div class="space-y-4">
+        <input type="text"  placeholder="Your Name"    class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-brand-blue" />
+        <input type="email" placeholder="Your Email"   class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-brand-blue" />
+        <input type="tel"   placeholder="Phone Number" class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-brand-blue" />
+        <textarea rows="4"  placeholder="Your Message" class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-brand-blue resize-none"></textarea>
+        <button class="w-full bg-brand-blue hover:bg-blue-900 text-white font-bold py-3 rounded-lg transition text-sm">
+          Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     STICKY FOOTER
+     Contains: copyright text + social media icon links
+     ══════════════════════════════════════════════════════════ -->
+<footer id="site-footer" class="bg-brand-blue border-t border-white/10">
+  <div class="max-w-screen-xl mx-auto px-4 py-5 flex flex-wrap justify-between lg:justify-around gap-3">
+
+    <!-- Copyright text -->
+    <p class="text-white/60 text-xs">
+      &copy; 2025 <span class="text-white font-bold">MamaPutOnline</span>. All rights reserved.
+    </p>
+
+    <!-- Social media icon links -->
+    <div class="flex items-center gap-4">
+
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"
+         class="text-white/60 hover:text-brand-gold transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.988V9.598h3.112v1.562h.044c.433-.822 1.49-1.689 3.066-1.689 3.278 0 3.883 2.158 3.883 4.963v6.018zM5.337 8.036a1.804 1.804 0 1 1 0-3.607 1.804 1.804 0 0 1 0 3.607zm1.559 12.416H3.776V9.598h3.12v10.854zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+
+      <!-- X (Twitter) -->
+      <a href="https://x.com" target="_blank" rel="noopener" aria-label="X (Twitter)"
+         class="text-white/60 hover:text-brand-gold transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"
+         class="text-white/60 hover:text-brand-gold transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+        </svg>
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/2348001234567" target="_blank" rel="noopener" aria-label="WhatsApp"
+         class="text-white/60 hover:text-brand-gold transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+      </a>
+
+    </div>
+  </div>
+</footer>
+<!-- END FOOTER -->
+
+</body>
+</html>
