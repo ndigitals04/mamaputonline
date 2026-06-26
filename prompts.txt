@@ -1,0 +1,39 @@
+I want you to build the landing page of an online take-away Nigerian cooked meal restaurant.
+
+Follow these build instructions to do so:
+
+Logo prompt:
+The Name of the business is MamaPutOnline. Create a logo for it with the initials MPO. It should be simple and aesthetic
+
+
+Menu Prompt
+The Header comes first and should be sticky. It should fill the width of the screen and be of blue color. The logo should be at the extreme left of the header while a search input form at the extreme right. The menu bar should bar should be placed in the center of the header with the following links: Products, Services, Customer Service and Contact Us.
+
+
+Hero section prompt:
+After the header comes the hero section. The hero section should have a minimum height of 30% of the screen height and a 100%  screen width. This section should be divided into two equal halves. The first containing a good image of a steaming deliciously cooked Nigerian soup. Ensure it has the right aspect ratio and is not pixelated. Insert a call to action in the center of this halve. On the second halve insert content in as boldly written words and large print letters inviting people to not miss the opportunity to buy from the online store.
+
+
+Main section prompt:
+For the Main section. It should have a side panel on the left of the screen. By the right of the side panel should be a set of product cards. Each product card should identify boldly the food with it's name,an image, quantity and price. There should be 4 product cards in a row and 3 rows of product cards present. There should be a link to each product card on the side panel.
+
+
+Footer prompt
+Create a footer with social media links to linkedIn, X, Instagram and Whatsapp. Ensure it's sticky.
+
+
+
+Use comments to explain what is being done at each point.
+
+Very important. This project should be mobile responsive.
+
+
+
+Build this strictly with html and tailwind CSS.
+
+
+
+
+
+
+
